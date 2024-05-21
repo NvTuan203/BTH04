@@ -27,6 +27,16 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> mylist;
     ArrayAdapter<String> myadapter;
     SQLiteDatabase mydatabase;
+    public void performQuery() {
+        mylist.clear();
+        Cursor c = mydatabase.query("tbllop", null, null, null, null, null, null);
+        while (c.moveToNext()) {
+            String data = c.getString(0) + " - " + c.getString(1) + " - " + c.getString(2);
+            mylist.add(data);
+        }
+        c.close();
+        myadapter.notifyDataSetChanged();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,17 +79,11 @@ public class MainActivity extends AppCompatActivity {
                     msg = "Insert record Sucessfully";
                 }
                 Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                performQuery();
             }
-            private void performQuery() {
-                mylist.clear();
-                Cursor c = mydatabase.query("tbllop", null, null, null, null, null, null);
-                while (c.moveToNext()) {
-                    String data = c.getString(0) + " - " + c.getString(1) + " - " + c.getString(2);
-                    mylist.add(data);
-                }
-                c.close();
-                myadapter.notifyDataSetChanged();
-            }
+
+
+
         });
         btndelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,16 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     msg = n + "record is deleted";
                 }
                 Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-            }
-            private void performQuery() {
-                mylist.clear();
-                Cursor c = mydatabase.query("tbllop", null, null, null, null, null, null);
-                while (c.moveToNext()) {
-                    String data = c.getString(0) + " - " + c.getString(1) + " - " + c.getString(2);
-                    mylist.add(data);
-                }
-                c.close();
-                myadapter.notifyDataSetChanged();
+                performQuery();
             }
 
         });
@@ -121,17 +116,9 @@ public class MainActivity extends AppCompatActivity {
                     msg = n + "record is update";
                 }
                 Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                performQuery();
             }
-            private void performQuery() {
-                mylist.clear();
-                Cursor c = mydatabase.query("tbllop", null, null, null, null, null, null);
-                while (c.moveToNext()) {
-                    String data = c.getString(0) + " - " + c.getString(1) + "-" + c.getString(2);
-                    mylist.add(data);
-                }
-                c.close();
-                myadapter.notifyDataSetChanged();
-            }
+
         });
 //        btnquery.setOnClickListener(new View.OnClickListener() {
 //            @Override
