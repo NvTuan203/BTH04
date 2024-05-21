@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 mylist.clear();
                 Cursor c = mydatabase.query("tbllop", null, null, null, null, null, null);
                 while (c.moveToNext()) {
-                    String data = c.getString(0) + " - " + c.getString(1) + " - " + c.getString(2);
+                    String data = c.getString(0) + " - " + c.getString(1) + "-" + c.getString(2);
                     mylist.add(data);
                 }
                 c.close();
